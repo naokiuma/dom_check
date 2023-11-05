@@ -38,6 +38,11 @@ proxyStore.ready().then(() => {
   const tw = twind(config, sheet);
   observe(tw, shadowRoot);
 
+  // 実際にdomを操作するには、ここのファイルプログラムを記載する
+  const images = document.querySelectorAll('img');
+  console.log(images);
+  console.log('やあ');
+
   const shadowWrapper = document.createElement('div');
   shadowWrapper.id = 'root';
   shadowWrapper.style.display = 'contents';
