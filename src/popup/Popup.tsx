@@ -6,11 +6,34 @@ import { getBucket } from '@extend-chrome/storage';
 interface MyBucket {
   targetLang: string;
 }
-
 const bucket = getBucket<MyBucket>('my_bucket', 'sync');
 
 const Popup = (): ReactElement => {
-  const [lang, setLang] = useState('EN');
+  document.body.style.width = '20rem';
+  document.body.style.height = '20rem';
+  const [lang, setLang] = useState('tom');
+  const [test, setTest] = useState('');
+
+  const title = document.getElementById('pageTitle');
+  // const url = document.getElementById("pageURL");
+
+  // if(title != null){
+  chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
+    if (tabs[0].title != undefined) {
+      setTest(tabs[0].title);
+    }
+    // url.value = tabs[0].url;
+  });
+  // }
+
+  useEffect(() => {
+    (async () => {
+      const value = await bucket.get();
+      if (value.targetLang) {
+        setLang(value.targetLang);
+      }
+    })();
+  }, []);
 
   useEffect(() => {
     async () => {
@@ -34,15 +57,19 @@ const Popup = (): ReactElement => {
   return (
     <div>
       <h1>Popup</h1>
-
+      ページのタイトルを取得
+      <br />
+      {test}
+      {/* 
       <p>どの言語に翻訳しますか？</p>
+	  <span>{lang}</span>
 
       <select name="target_lang" value={lang} onChange={(event) => saveLang(event.target.value)}>
         <option value="EN">英語</option>
         <option value="KO">韓国語</option>
         <option value="ZH">中国語</option>
         <option value="JA">日本語</option>
-      </select>
+      </select> */}
       {/* <Select
 
 				label="どの言語に翻訳しますか？"

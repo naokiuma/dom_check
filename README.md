@@ -145,3 +145,10 @@ This repository is following the [Conventional Commits](https://www.conventional
 ## License
 
 MIT © [Sinan Bekar](https://sinan.engineer)
+
+## 参考 URL
+
+https://qiita.com/FrogApp/items/9ec3aa0363f75924e75f <br>
+https://zenn.dev/alvinvin/books/chrome_extension/viewer/chapter08
+
+## study メモ
