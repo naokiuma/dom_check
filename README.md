@@ -149,6 +149,8 @@ MIT © [Sinan Bekar](https://sinan.engineer)
 ## 参考 URL
 
 https://qiita.com/FrogApp/items/9ec3aa0363f75924e75f <br>
-https://zenn.dev/alvinvin/books/chrome_extension/viewer/chapter08
+https://zenn.dev/alvinvin/books/chrome_extension/viewer/chapter08<br>
+react でタグをパースする<br>
+https://kray.jp/blog/react-html-parser/
 
 ## study メモ

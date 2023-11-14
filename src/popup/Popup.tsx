@@ -14,17 +14,32 @@ const Popup = (): ReactElement => {
   const [lang, setLang] = useState('tom');
   const [test, setTest] = useState('');
 
-  const title = document.getElementById('pageTitle');
+  //ある or ない
+  const [is_exist, setIsExist] = useState(false);
+
+  //targetのdomを全てセットする配列
+  const [target_dom, setTargetDom] = useState(['']);
+
+  //条件をセット
+  const [check_info, setCheckInfo] = useState();
+
+  //imgを選んだ場合
+  //全てのimgタグを取得
+
+  // const title = document.getElementById("pageTitle");
   // const url = document.getElementById("pageURL");
 
-  // if(title != null){
   chrome.tabs.query({ active: true, lastFocusedWindow: true }, (tabs) => {
     if (tabs[0].title != undefined) {
       setTest(tabs[0].title);
+      const imgElems = document.images;
+
+      for (let i = 0, len = imgElems.length; i < len; i++) {
+        // console.log(imgElems[i].src);
+        imgElems[i].style.border = '1px solid red';
+      }
     }
-    // url.value = tabs[0].url;
   });
-  // }
 
   useEffect(() => {
     (async () => {
@@ -33,15 +48,6 @@ const Popup = (): ReactElement => {
         setLang(value.targetLang);
       }
     })();
-  }, []);
-
-  useEffect(() => {
-    async () => {
-      const value = await bucket.get();
-      if (value.targetLang) {
-        setLang(value.targetLang);
-      }
-    };
   }, []);
 
   const saveLang = (lang: string) => {
@@ -56,33 +62,23 @@ const Popup = (): ReactElement => {
 
   return (
     <div>
-      <h1>Popup</h1>
+      <h1>Domチェック</h1>
       ページのタイトルを取得
-      <br />
       {test}
-      {/* 
-      <p>どの言語に翻訳しますか？</p>
-	  <span>{lang}</span>
-
-      <select name="target_lang" value={lang} onChange={(event) => saveLang(event.target.value)}>
+      <p>検索するタグを選んでください</p>
+      <span>{lang}</span>
+      {/* <select name="target_lang" value={lang} onChange={(event) => saveLang(event.target.value)}>
         <option value="EN">英語</option>
         <option value="KO">韓国語</option>
         <option value="ZH">中国語</option>
         <option value="JA">日本語</option>
       </select> */}
-      {/* <Select
-
-				label="どの言語に翻訳しますか？"
-				value={lang}
-				// onChange={(value: string) => saveLang(value)}
-				data={[
-					{ value: 'EN', label: '英語' },
-					{ value: 'KO', label: '韓国語' },
-					{ value: 'ZH', label: '中国語' },
-					{ value: 'JA', label: '日本語' },
-				]}
-
-				/> */}
+      <select name="tag_type" value={lang} onChange={(event) => saveLang(event.target.value)}>
+        <option value="EN">英語</option>
+        <option value="KO">韓国語</option>
+        <option value="ZH">中国語</option>
+        <option value="JA">日本語</option>
+      </select>
     </div>
   );
 };

@@ -43,6 +43,11 @@ proxyStore.ready().then(() => {
   console.log(images);
   console.log('やあ');
 
+  for (let i = 0, len = images.length; i < len; i++) {
+    // console.log(imgElems[i].src);
+    images[i].style.border = '1px solid red';
+  }
+
   const shadowWrapper = document.createElement('div');
   shadowWrapper.id = 'root';
   shadowWrapper.style.display = 'contents';
